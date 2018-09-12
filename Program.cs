@@ -14,8 +14,7 @@ namespace GoogleTranslateBible
     {
         static void Main(string[] args)
         {
-            //$env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\furry\Documents\Visual Studio 2015\Projects\GoogleTranslateBible\GoogleTranslateBible-2eb784487f52.json"
-
+            
             Console.OutputEncoding = Encoding.GetEncoding("Windows-1255");
 
             string targetDirectory = @"C:\Users\furry\Documents\Google Translate\";
