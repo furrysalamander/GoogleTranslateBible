@@ -1,4 +1,4 @@
-# GoogleTranslateBible
+# Google Translate Bible
 I wanted to know what would happen if you ran the Bible's original text through Google Translate.
 This is a very simple program to automate that.
 
