@@ -17,6 +17,7 @@ namespace GoogleTranslateBible
             
             Console.OutputEncoding = Encoding.GetEncoding("Windows-1255");
 
+            // This is your target directory.  This should have the files from the Tanach archive.
             string targetDirectory = @"C:\Users\furry\Documents\Google Translate\";
 
             string[] fileEntries = Directory.GetFiles(targetDirectory);
