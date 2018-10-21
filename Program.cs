@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-
-using Google.Cloud.Translation.V2;
+using System.Text;
 
 
 namespace GoogleTranslateBible
@@ -14,7 +9,6 @@ namespace GoogleTranslateBible
     {
         static void Main(string[] args)
         {
-            
             Console.OutputEncoding = Encoding.GetEncoding("Windows-1255");
 
             // This is your target directory.  This should have the files from the Tanach archive.
@@ -27,39 +21,35 @@ namespace GoogleTranslateBible
                 Console.WriteLine(fileName);
                 string line;
                 // Read the file and display it line by line.  
-                System.IO.StreamReader file =
-                    new System.IO.StreamReader(fileName);
-                string startChars = file.ReadLine().Substring(0, 3);
-                while ((line = file.ReadLine()) != null)
+                using (System.IO.StreamReader file = new System.IO.StreamReader(fileName))
                 {
-                    if (line.Substring(1, 4) == "xxxx")
-                        if (line.Length >= 14)
+                    string startChars = file.ReadLine().Substring(0, 3);
+                    while ((line = file.ReadLine()) != null)
+                    {
+                        if (line.Substring(1, 4) == "xxxx")
                         {
-                            Console.WriteLine(line);
-                            using (System.IO.StreamWriter output = new System.IO.StreamWriter(outPath, true))
+                            if (line.Length >= 14)
                             {
-                                output.WriteLine(line);
+                                Console.WriteLine(line);
+                                using (System.IO.StreamWriter output = new System.IO.StreamWriter(outPath, true))
+                                {
+                                    output.WriteLine(line);
+                                }
                             }
-
                         }
                         else
                         {
-
+                            Console.WriteLine(line);
+                            string outLine = Translate(line/*.Substring(9,line.Length-9)*/, "en", "iw");
+                            Console.WriteLine(outLine);
+                            using (System.IO.StreamWriter output = new System.IO.StreamWriter(outPath, true))
+                            {
+                                output.WriteLine(outLine);
+                            }
+                            Console.WriteLine();
                         }
-                    else
-                    {
-                        Console.WriteLine(line);
-                        string outLine = Translate(line/*.Substring(9,line.Length-9)*/, "en", "iw");
-                        Console.WriteLine(outLine);
-                        using (System.IO.StreamWriter output = new System.IO.StreamWriter(outPath, true))
-                        {
-                            output.WriteLine(outLine);
-                        }
-                        Console.WriteLine();
                     }
                 }
-
-                file.Close();
             }
             Console.ReadLine();
 
